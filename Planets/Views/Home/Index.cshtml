@@ -1,8 +1,57 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using Planets.Models.Classes;
+@using Planets.Models.AbstractClasses;
+@model SolarSystem
+
+@{
+    ViewData["Title"] = "Our solar system";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1>Our solar system</h1>
+
+    @foreach(InterstarPlanet planet in Model.Planets)
+    {
+        <div id="PlanetCard">
+            <partial name="_PlanetCard" model="planet"/>
+        </div>
+    }
+
+    <div id="tooltip">
+        <p>I am the tooltip!</p>
+    </div>
 </div>
+
+@section scripts {
+    <script type="text/javascript">
+
+        let isTooltipVisible = false;
+
+        function UpdateTooltipVisibility() {
+            if (isTooltipVisible) {
+                $("#tooltip").show();
+                console.log('show tooltip');
+            }
+            else {
+                $("#tooltip").hide();
+            }
+        }
+
+        $(document).ready(function () {
+            $(".planet-card").click(function () {
+                isTooltipVisible = true;
+                UpdateTooltipVisibility();
+                let name = $(this).data('name');
+                console.log(name);
+
+                $.ajax({
+                    url: "/Home/Tooltip",
+                    type: "GET",
+                   data: {name: name}
+                })
+                .done(function(partialViewResult)) {
+                    $('#tooltip').html(partialViewResult);
+                }
+            });
+        });
+    </script>
+}

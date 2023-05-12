@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Planets.DAL;
 using Planets.Models;
+using Planets.Models.AbstractClasses;
+using Planets.Models.Classes;
 using System.Diagnostics;
 
 namespace Planets.Controllers
@@ -15,12 +18,15 @@ namespace Planets.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            SolarSystem model = MockData.GetSolarSystem();
+
+            return View(model);
         }
 
-        public IActionResult Privacy()
+        public IActionResult Tooltip(string name)
         {
-            return View();
+            Planet model = MockData.GetSolarSystem().Planets.First(c => c.Name == name); // Temporary
+            return PartialView("_Tooltip", model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
