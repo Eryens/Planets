@@ -25,8 +25,8 @@ namespace Planets.Controllers
 
         public IActionResult Tooltip(string name)
         {
-            Planet model = MockData.GetSolarSystem().Planets.First(c => c.Name == name); // Temporary
-            return PartialView("_Tooltip", model);
+            Planet model = MockData.GetSolarSystem().Planets.First(c => c.Name == name);
+            return PartialView("_PlanetTooltip", model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

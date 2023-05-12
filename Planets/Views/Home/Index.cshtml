@@ -9,16 +9,20 @@
 <div class="text-center">
     <h1>Our solar system</h1>
 
-    @foreach(InterstarPlanet planet in Model.Planets)
-    {
-        <div id="PlanetCard">
-            <partial name="_PlanetCard" model="planet"/>
+    <div class="row">
+        <div class="col col-md-4">
+            @foreach (InterstarPlanet planet in Model.Planets)
+            {
+                <div id="PlanetCard">
+                    <partial name="_PlanetCard" model="planet" />
+                </div>
+            }
         </div>
-    }
-
-    <div id="tooltip">
-        <p>I am the tooltip!</p>
+        <div class="col col-md-8">
+            <div id="tooltip"/>
+        </div>
     </div>
+
 </div>
 
 @section scripts {
@@ -48,9 +52,9 @@
                     type: "GET",
                    data: {name: name}
                 })
-                .done(function(partialViewResult)) {
+                .done(function(partialViewResult) {
                     $('#tooltip').html(partialViewResult);
-                }
+                });
             });
         });
     </script>

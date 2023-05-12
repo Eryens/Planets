@@ -3,9 +3,9 @@ using Planets.Models.Classes;
 
 namespace Planets.DAL
 {
-    public static class MockData
+    internal static class MockData
     {
-        private static List<InterstarPlanet> GetSolarSystemPlanets()
+        internal static List<InterstarPlanet> GetSolarSystemPlanets()
         {
             return new List<InterstarPlanet>()
             {
@@ -26,7 +26,7 @@ namespace Planets.DAL
                     Diameter = 12100,
                     Mass = 0.857f,
                     RockTypes = new List<string>() { "Metal", "Dense rocks"},
-                    Picture = "https://en.wikipedia.org/wiki/Venus#/media/File:Venus_2_Approach_Image.jpg",
+                    Picture = "https://upload.wikimedia.org/wikipedia/commons/b/b2/Venus_2_Approach_Image.jpg",
                     DistanceFromSun = new Tuple<int, int>(66800000, 108000000), 
                 },
                 new RockyPlanet
@@ -36,12 +36,13 @@ namespace Planets.DAL
                     Diameter = 12742,
                     Mass = 1,
                     RockTypes = new List<string>() { "Aluminium", "Silicon", "Iron", "Calcium", "Sodium" },
+                    Picture = "https://upload.wikimedia.org/wikipedia/commons/c/cb/The_Blue_Marble_%28remastered%29.jpg",
                     DistanceFromSun = new Tuple<int, int>(147000000, 152000000),
                 }
             };
         }
 
-        public static SolarSystem GetSolarSystem()
+        internal static SolarSystem GetSolarSystem()
         {
             return new SolarSystem
             {
