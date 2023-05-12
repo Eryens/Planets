@@ -8,8 +8,8 @@
 
     <div id="tooltip-content">
         <p>@Model.Description</p>
-        <p>Diameter: @Model.Diameter</p>
-        <p>Mass: @Model.Mass</p>
+        <p>Diameter: @Model.Diameter km</p>
+        <p>Mass: @Model.Mass Earth mass</p>
 
         @if(Model is InterstarPlanet)
         {
@@ -40,7 +40,7 @@
             GasGiant planet = (GasGiant)Model;
             bool first = true;
             <p>
-                Types of rock found on this planet:
+                Gas composition:
                 @foreach (string gas in planet.Gas)
                 {
                     if (!first)
