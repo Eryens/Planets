@@ -20,8 +20,8 @@ namespace Planets.Controllers.Api
             return MockData.GetSolarSystemPlanets().First(c => c.Name == name);
         }
 
-        // Note: All functions below will not work due to the limitation of a simple list mock
-        // But it provides the blueprint to implement with a real data provider
+        // Note: All functions below will not work due to the limitation of using a simple list mock as a data layer
+        // However, it provides the blueprint to implement with a real data provider such as SQL Server
 
         // POST: /api/planet
         [HttpPost]
