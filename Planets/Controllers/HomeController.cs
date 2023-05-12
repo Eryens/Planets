@@ -25,7 +25,15 @@ namespace Planets.Controllers
 
         public IActionResult Tooltip(string name)
         {
-            Planet model = MockData.GetSolarSystem().Planets.First(c => c.Name == name);
+            Planet model;
+            try
+            {
+                model = MockData.GetSolarSystem().Planets.First(c => c.Name == name);
+            }
+            catch
+            {
+                throw new ArgumentException("The given planet name is not valid");
+            }
             return PartialView("_PlanetTooltip", model);
         }
 

@@ -1,6 +1,8 @@
 ﻿using Planets.Models.AbstractClasses;
 using Planets.Models.Classes;
+using System.Runtime.CompilerServices;
 
+[assembly:InternalsVisibleTo("PlanetsTests")]
 namespace Planets.DAL
 {
     internal static class MockData

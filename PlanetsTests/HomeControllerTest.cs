@@ -34,7 +34,7 @@ namespace PlanetsTests
             ViewResult result = (ViewResult)controller.Index();
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.That(result, Is.Not.Null);
         }
 
         [Test]
@@ -47,7 +47,53 @@ namespace PlanetsTests
             ViewResult result = (ViewResult)controller.Index();
 
             // Assert
-            Assert.IsNotNull(result.Model);
+            Assert.That(result.Model, Is.Not.Null);
+        }
+
+        [Test]
+        public void Tooltip_ValidData_IsNotNull()
+        {
+            // Arrange
+            HomeController controller = new HomeController(logger);
+
+            // Act
+            PartialViewResult result = (PartialViewResult)controller.Tooltip("Earth");
+
+            // Assert
+            Assert.That(result, Is.Not.Null);
+        }
+
+        [Test]
+        public void Tooltip_ValidData_ContainsModel()
+        {
+            // Arrange
+            HomeController controller = new HomeController(logger);
+
+            // Act
+            PartialViewResult result = (PartialViewResult)controller.Tooltip("Earth");
+
+            // Assert
+            Assert.That(result.Model, Is.Not.Null);
+        }
+
+        [Test]
+        public void Tooltip_WrongData_Throws()
+        {
+            // Arrange
+            HomeController controller = new HomeController(logger);
+
+            // Act - Assert
+            Assert.Throws<ArgumentException>(() => controller.Tooltip("Pluto"));
+        }
+
+        [Test]
+        public void Tooltip_EmptyData_Throws()
+        {
+            // Arrange
+            HomeController controller = new HomeController(logger);
+
+            // Act - Assert
+            Assert.Throws<ArgumentException>(() => controller.Tooltip(""));
         }
     }
 }
