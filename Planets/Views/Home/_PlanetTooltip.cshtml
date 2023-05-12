@@ -1,0 +1,59 @@
+﻿@using Planets.Models.AbstractClasses;
+@using Planets.Models.Classes;
+@model Planet
+
+<div id="planet-tooltip">
+    <img id="tooltip-img" src="@Model.Picture"/>
+    <h2>@Model.Name</h2>
+
+    <div id="tooltip-content">
+        <p>@Model.Description</p>
+        <p>Diameter: @Model.Diameter km</p>
+        <p>Mass: @Model.Mass Earth mass</p>
+
+        @if(Model is InterstarPlanet)
+        {
+            InterstarPlanet planet = (InterstarPlanet)Model; 
+            <p>Distance to the sun: between @planet.DistanceFromSun.Item1 km and @planet.DistanceFromSun.Item2 km</p>
+        }
+        @if (Model is RockyPlanet) {
+            RockyPlanet planet = (RockyPlanet)Model;
+            bool first = true;
+            <p>
+                Types of rock found on this planet: 
+                @foreach(string rock in planet.RockTypes)
+                {
+                    if (!first)
+                    {
+                        <span>-</span>
+                    }
+                    else
+                    {
+                        first = false;
+                    }
+                    <span>@rock</span>
+                }
+            </p>
+        }
+        @if (Model is GasGiant)
+        {
+            GasGiant planet = (GasGiant)Model;
+            bool first = true;
+            <p>
+                Gas composition:
+                @foreach (string gas in planet.Gas)
+                {
+                    if (!first)
+                    {
+                        <span>-</span>
+                    }
+                    else
+                    {
+                        first = false;
+                    }
+                    <span>@gas</span>
+                }
+            </p>
+        }
+    </div>
+</div>
